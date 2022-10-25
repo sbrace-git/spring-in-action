@@ -1,0 +1,23 @@
+p31
+ch02
+2.1.2 创建控制器类
+
+filterByType 方法第一个参数 ingredients 没有指定类型
+
+private List<Ingredient> filterByType(
+		<Ingredient> ingredients, Type type) {
+	return ingredients
+			.stream()
+			.filter(x -> x.getType().equals(type))
+			.collect(Collectors.toList());
+}
+
+应是
+
+private List<Ingredient> filterByType(
+		List<Ingredient> ingredients, Type type) {
+	return ingredients
+			.stream()
+			.filter(x -> x.getType().equals(type))
+			.collect(Collectors.toList());
+}
