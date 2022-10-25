@@ -10,7 +10,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         // IDEA : CTRL + F9
-        model.addAttribute("name", "value31");
+        // chrome LiveReload 插件安装完成后，需要在浏览器点击启动 Enable LiveReload
+        model.addAttribute("name", "value");
         return "home";
     }
 }
