@@ -1,5 +1,7 @@
 p43
 2.3 校验表单输入
 
+API 少打印了一个字母 I
+
 Hibernate 的 Validation AP 实现又添加了一些校验注解
 Hibernate 的 Validation API 实现又添加了一些校验注解

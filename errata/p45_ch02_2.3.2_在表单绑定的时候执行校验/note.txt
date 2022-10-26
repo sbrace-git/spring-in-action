@@ -1,0 +1,35 @@
+p45
+2.3.2 在表单绑定的时候执行校验
+程序清单 2.12 校验 POST 提交的 Taco
+
+@PostMappping
+public String processDesign(@Valid Taco design, Errors errors) {
+	if (errors.hasErrors()) {
+      return "design";
+    }
+	//...
+}
+
+如果 errors.hasErrors() 返回 true,则会跳转到 design 视图
+design.html 有如下代码
+<form method="post" th:object="${design}">
+	...
+</form>
+template parsing 时会报异常:
+java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name 'design' available as request attribute
+
+解决办法已经在实例代码中写出
+@PostMapping
+public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors) {
+	if (errors.hasErrors()) {
+		return "design";
+	}
+	//...
+}
+
+example:
+ch02/taco-cloud/src/main/java/tacos/web/DesignTacoController.java
+
+
+
+
