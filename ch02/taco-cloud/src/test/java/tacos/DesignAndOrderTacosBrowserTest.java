@@ -63,6 +63,39 @@ public class DesignAndOrderTacosBrowserTest {
         assertEquals(homePageUrl(), browser.getCurrentUrl());
     }
 
+    @Test
+    public void testDesignATacoPage_InvalidOrderInfo() {
+        browser.get(homePageUrl());
+        clickDesignATaco();
+        assertDesignPageElements();
+        buildAndSubmitATaco("Basic Taco", "FLTO", "GRBF", "CHED", "TMTO", "SLSA");
+        submitInvalidOrderForm();
+        fillInAndSubmitOrderForm();
+        assertEquals(homePageUrl(), browser.getCurrentUrl());
+    }
+
+    private void submitInvalidOrderForm() {
+        assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
+        fillField("input#name", "I");
+        fillField("input#street", "1");
+        fillField("input#city", "F");
+        fillField("input#state", "C");
+        fillField("input#zip", "8");
+        fillField("input#ccNumber", "1234432112344322");
+        fillField("input#ccExpiration", "14/91");
+        fillField("input#ccCVV", "1234");
+        browser.findElementByCssSelector("form").submit();
+
+        assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
+
+        List<String> validationErrors = getValidationErrorTexts();
+        assertEquals(4, validationErrors.size());
+        assertTrue(validationErrors.contains("Please correct the problems below and resubmit."));
+        assertTrue(validationErrors.contains("Not a valid credit card number"));
+        assertTrue(validationErrors.contains("Must be formatted MM/YY"));
+        assertTrue(validationErrors.contains("Invalid CVV"));
+    }
+
     private void submitEmptyOrderForm() {
         assertEquals(currentOrderDetailsPageUrl(), browser.getCurrentUrl());
         browser.findElementByCssSelector("form").submit();
