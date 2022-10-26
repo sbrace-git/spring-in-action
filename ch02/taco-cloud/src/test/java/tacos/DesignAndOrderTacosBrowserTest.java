@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -48,6 +49,48 @@ public class DesignAndOrderTacosBrowserTest {
         buildAndSubmitATaco("Another Taco", "COTO", "CARN", "JACK", "LETC", "SRCR");
         fillInAndSubmitOrderForm();
         assertEquals(homePageUrl(), browser.getCurrentUrl());
+    }
+
+
+    @Test
+    public void testDesignATacoPage_EmptyOrderInfo() {
+        browser.get(homePageUrl());
+        clickDesignATaco();
+        assertDesignPageElements();
+        buildAndSubmitATaco("Basic Taco", "FLTO", "GRBF", "CHED", "TMTO", "SLSA");
+        submitEmptyOrderForm();
+        fillInAndSubmitOrderForm();
+        assertEquals(homePageUrl(), browser.getCurrentUrl());
+    }
+
+    private void submitEmptyOrderForm() {
+        assertEquals(currentOrderDetailsPageUrl(), browser.getCurrentUrl());
+        browser.findElementByCssSelector("form").submit();
+
+        assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
+
+        List<String> validationErrors = getValidationErrorTexts();
+        assertEquals(9, validationErrors.size());
+        assertTrue(validationErrors.contains("Please correct the problems below and resubmit."));
+        assertTrue(validationErrors.contains("Name is required"));
+        assertTrue(validationErrors.contains("Street is required"));
+        assertTrue(validationErrors.contains("City is required"));
+        assertTrue(validationErrors.contains("State is required"));
+        assertTrue(validationErrors.contains("Zip code is required"));
+        assertTrue(validationErrors.contains("Not a valid credit card number"));
+        assertTrue(validationErrors.contains("Must be formatted MM/YY"));
+        assertTrue(validationErrors.contains("Invalid CVV"));
+    }
+
+    private List<String> getValidationErrorTexts() {
+        return browser.findElementsByClassName("validationError")
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    private String currentOrderDetailsPageUrl() {
+        return homePageUrl() + "orders/current";
     }
 
     private String homePageUrl() {
