@@ -1,17 +1,20 @@
 package tacos;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tacos.model.Ingredient;
+import tacos.repository.IngredientRepository;
 import tacos.web.DesignTacoController;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -23,10 +26,13 @@ public class DesignTacoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private IngredientRepository ingredientRepository;
+
     private static List<Ingredient> ingredients;
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         ingredients = Arrays.asList(
                 new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
@@ -39,6 +45,13 @@ public class DesignTacoControllerTest {
                 new Ingredient("SLSA", "Salsa", Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
+
+        when(ingredientRepository.findAll()).thenReturn(ingredients);
+
+//        when(ingredientRepository.findOne("FLTO")).thenReturn(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
+//        when(ingredientRepository.findOne("GRBF")).thenReturn(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
+//        when(ingredientRepository.findOne("CHED")).thenReturn(new Ingredient("CHED", "Cheddar", Type.CHEESE));
+
     }
 
 

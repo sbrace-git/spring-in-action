@@ -10,6 +10,8 @@ import javax.validation.constraints.Pattern;
 @Data
 public class Order {
 
+    private Long id;
+
     @NotBlank(message = "Name is required")
     private String name;
 
