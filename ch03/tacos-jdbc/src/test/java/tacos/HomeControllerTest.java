@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tacos.repository.IngredientRepository;
+import tacos.repository.TacoRepository;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,6 +20,9 @@ public class HomeControllerTest {
 
     @MockBean
     private IngredientRepository ingredientRepository;
+
+    @MockBean
+    private TacoRepository tacoRepository;
 
     @Test
     public void testHomePage() throws Exception {

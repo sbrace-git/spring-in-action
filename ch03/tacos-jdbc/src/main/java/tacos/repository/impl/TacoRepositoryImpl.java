@@ -21,7 +21,6 @@ public class TacoRepositoryImpl implements TacoRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    // TODO: 2022/10/27 p65 ?? 没有注解 @Autowwired?
     @Autowired
     public TacoRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -43,9 +42,11 @@ public class TacoRepositoryImpl implements TacoRepository {
 
     private long saveTacoInfo(Taco taco) {
         taco.setCreatedAt(new Date());
-        PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreatorFactory(
-                "insert into Taco (name,createdAt) values (?,?)", Types.VARCHAR, Types.TIMESTAMP)
-                .newPreparedStatementCreator(Arrays.asList(taco.getName(), new Timestamp(taco.getCreatedAt().getTime())));
+        PreparedStatementCreatorFactory preparedStatementCreatorFactory = new PreparedStatementCreatorFactory(
+                "insert into Taco (name,createdAt) values (?,?)", Types.VARCHAR, Types.TIMESTAMP);
+        preparedStatementCreatorFactory.setReturnGeneratedKeys(true);
+        PreparedStatementCreator preparedStatementCreator = preparedStatementCreatorFactory.newPreparedStatementCreator(
+                Arrays.asList(taco.getName(), new Timestamp(taco.getCreatedAt().getTime())));
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(preparedStatementCreator, generatedKeyHolder);

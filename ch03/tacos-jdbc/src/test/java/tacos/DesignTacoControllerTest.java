@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tacos.model.Ingredient;
 import tacos.repository.IngredientRepository;
+import tacos.repository.TacoRepository;
 import tacos.web.DesignTacoController;
 
 import java.util.Arrays;
@@ -28,6 +29,9 @@ public class DesignTacoControllerTest {
 
     @MockBean
     private IngredientRepository ingredientRepository;
+
+    @MockBean
+    private TacoRepository tacoRepository;
 
     private static List<Ingredient> ingredients;
 
