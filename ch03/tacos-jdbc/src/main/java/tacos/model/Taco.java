@@ -19,7 +19,6 @@ public class Taco {
     @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
-    // TODO: 2022/10/27 前端？
     @NotEmpty(message = "You must choose at least 1 ingredient")
     private List<Ingredient> ingredients;
 }

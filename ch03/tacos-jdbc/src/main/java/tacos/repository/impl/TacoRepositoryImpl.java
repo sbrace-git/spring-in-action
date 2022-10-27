@@ -43,7 +43,8 @@ public class TacoRepositoryImpl implements TacoRepository {
 
     private long saveTacoInfo(Taco taco) {
         taco.setCreatedAt(new Date());
-        PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreatorFactory("insert into Taco (name,createdAt) values (?,?)", Types.VARCHAR, Types.TIMESTAMP)
+        PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreatorFactory(
+                "insert into Taco (name,createdAt) values (?,?)", Types.VARCHAR, Types.TIMESTAMP)
                 .newPreparedStatementCreator(Arrays.asList(taco.getName(), new Timestamp(taco.getCreatedAt().getTime())));
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
