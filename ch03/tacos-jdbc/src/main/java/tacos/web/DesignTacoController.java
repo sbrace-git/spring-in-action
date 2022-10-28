@@ -16,7 +16,9 @@ import tacos.repository.TacoRepository;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static tacos.model.Ingredient.Type;
@@ -63,8 +65,12 @@ public class DesignTacoController {
         }
         log.info("Processing design : {}", design);
         Taco taco = tacoRepository.save(design);
-        httpSession.setAttribute("taco", taco);
-
+        @SuppressWarnings("unchecked")
+        List<Taco> tacos = Optional.ofNullable(httpSession.getAttribute("tacos"))
+                .map(obj -> (List<Taco>) obj)
+                .orElseGet(ArrayList::new);
+        tacos.add(taco);
+        httpSession.setAttribute("tacos", tacos);
         return "redirect:/orders/current";
     }
 

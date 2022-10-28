@@ -14,7 +14,7 @@ import tacos.repository.OrderRepository;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -40,10 +40,12 @@ public class OrderController {
             return "orderForm";
         }
         log.info("processOrder Order submitted: {}", order);
-        Taco taco = (Taco) httpSession.getAttribute("taco");
-        order.setTacos(Collections.singletonList(taco));
+        @SuppressWarnings("unchecked")
+        List<Taco> tacos = (List<Taco>) httpSession.getAttribute("tacos");
+        order.setTacos(tacos);
         Order save = orderRepository.save(order);
         log.info("processOrder save = {}", save);
+        httpSession.removeAttribute("tacos");
         return "redirect:/";
     }
 
