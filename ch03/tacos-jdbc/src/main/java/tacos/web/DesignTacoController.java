@@ -5,17 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.model.Ingredient;
-import tacos.model.Order;
 import tacos.model.Taco;
 import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static tacos.model.Ingredient.Type;
@@ -56,18 +57,13 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design") Taco design,
-                                @ModelAttribute("order") @SessionAttribute("order") Order order,
-                                Errors errors) {
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, HttpSession httpSession) {
         if (errors.hasErrors()) {
             return "design";
         }
         log.info("Processing design : {}", design);
         Taco taco = tacoRepository.save(design);
-        List<Taco> tacos = Optional.ofNullable(order.getTacos())
-                .orElseGet(ArrayList::new);
-        tacos.add(taco);
-        order.setTacos(tacos);
+        httpSession.setAttribute("taco", taco);
 
         return "redirect:/orders/current";
     }
