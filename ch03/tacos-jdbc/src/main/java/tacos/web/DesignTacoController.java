@@ -13,7 +13,9 @@ import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static tacos.model.Ingredient.Type;
@@ -62,7 +64,10 @@ public class DesignTacoController {
         }
         log.info("Processing design : {}", design);
         Taco taco = tacoRepository.save(design);
-        order.setDesign(taco);
+        List<Taco> tacos = Optional.ofNullable(order.getTacos())
+                .orElseGet(ArrayList::new);
+        tacos.add(taco);
+        order.setTacos(tacos);
 
         return "redirect:/orders/current";
     }
