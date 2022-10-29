@@ -7,7 +7,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 import tacos.model.Ingredient;
+import tacos.model.Taco;
 import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 import tacos.web.DesignTacoController;
@@ -15,6 +19,7 @@ import tacos.web.DesignTacoController;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -79,4 +84,31 @@ public class DesignTacoControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().stringValues("Location", "/orders/current"));
     }
+
+    @Test
+    public void processDesign_shortName() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(post("/design")
+                        .content("name=Test&ingredients=FLTO,GRBF,CHED")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isOk())
+                .andExpect(view().name("design"))
+                .andExpect(model().attributeExists("taco"))
+                .andReturn();
+        ModelAndView modelAndView = mvcResult.getModelAndView();
+        assertNotNull(modelAndView);
+        ModelMap modelMap = modelAndView.getModelMap();
+        Object tacoObject = modelMap.getAttribute("taco");
+        assertNotNull(tacoObject);
+        assertInstanceOf(Taco.class, tacoObject);
+        Taco taco = (Taco) tacoObject;
+        String name = taco.getName();
+        assertEquals(name, "Test");
+        List<Ingredient> ingredients = taco.getIngredients();
+        assertEquals(ingredients, Arrays.asList(
+                new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
+                new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
+                new Ingredient("CHED", "Cheddar", Type.CHEESE)
+        ));
+    }
+
 }
