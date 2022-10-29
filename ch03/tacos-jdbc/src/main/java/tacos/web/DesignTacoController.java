@@ -44,9 +44,14 @@ public class DesignTacoController {
         }
     }
 
-    @ModelAttribute(name = "order")
+    @ModelAttribute
     public Order order() {
         return new Order();
+    }
+
+    @ModelAttribute
+    public Taco taco() {
+        return new Taco();
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
@@ -60,9 +65,9 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("taco") Taco taco,
+    public String processDesign(@Valid Taco taco,
                                 Errors errors,
-                                @ModelAttribute Order order) {
+                                Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
