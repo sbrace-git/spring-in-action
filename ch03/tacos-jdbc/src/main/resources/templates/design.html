@@ -21,7 +21,7 @@
                     <h3>Designate your wrap</h3>
                     <div th:each="ingredient : ${wrap}">
                         <input type="checkbox" name="ingredients" th:value="${ingredient.id}"
-                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient.id)}"/>
+                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient)}"/>
                         <span th:text="${ingredient.name}">ingredient</span><br>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <h3>Pick your protein:</h3>
                     <div th:each="ingredient : ${protein}">
                         <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
-                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient.id)}"/>
+                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient)}"/>
                         <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <h3>Choose your cheese:</h3>
                     <div th:each="ingredient : ${cheese}">
                         <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
-                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient.id)}"/>
+                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient)}"/>
                         <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <h3>Determine your veggies:</h3>
                     <div th:each="ingredient : ${veggies}">
                         <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
-                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient.id)}"/>
+                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient)}"/>
                         <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <h3>Select your sauce:</h3>
                     <div th:each="ingredient : ${sauce}">
                         <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
-                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient.id)}"/>
+                               th:checked="${!#arrays.isEmpty(taco.ingredients) && #arrays.contains(taco.ingredients,ingredient)}"/>
                         <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                     </div>
                 </div>

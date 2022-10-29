@@ -9,7 +9,17 @@
         <form method="post" th:action="@{/orders}" th:object="${order}">
             <h1>Order your taco creations!</h1>
             <img th:src="@{/images/TacoCloud.png}">
+
+            <h3>Your tacos in this order:</h3>
             <a th:href="@{/design}" id="another">Design another taco</a>
+            <ul>
+                <li th:each="taco : *{tacos}">
+                    <span th:text="${taco.name}">
+                        taco name
+                    </span>
+                </li>
+            </ul>
+
             <div th:if="${#fields.hasErrors()}">
                 <span class="validationError">
                     Please correct the problems below and resubmit.
@@ -41,6 +51,7 @@
             <span class="validationError" th:if="${#fields.hasErrors('deliveryZip')}" th:errors="*{deliveryZip}">Zip code Error</span>
             <br>
 
+            <h3>Here's how I'll pay...</h3>
             <label for="ccNumber">Credit Card #: </label>
             <input type="text" th:field="*{ccNumber}">
             <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}"

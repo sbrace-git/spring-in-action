@@ -52,9 +52,9 @@ public class DesignTacoControllerTest {
 
         when(ingredientRepository.findAll()).thenReturn(ingredients);
 
-//        when(ingredientRepository.findOne("FLTO")).thenReturn(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
-//        when(ingredientRepository.findOne("GRBF")).thenReturn(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
-//        when(ingredientRepository.findOne("CHED")).thenReturn(new Ingredient("CHED", "Cheddar", Type.CHEESE));
+        when(ingredientRepository.findOne("FLTO")).thenReturn(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
+        when(ingredientRepository.findOne("GRBF")).thenReturn(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
+        when(ingredientRepository.findOne("CHED")).thenReturn(new Ingredient("CHED", "Cheddar", Type.CHEESE));
 
     }
 

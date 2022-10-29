@@ -49,24 +49,20 @@ public class DesignTacoController {
         return new Order();
     }
 
-    @ModelAttribute(name = "taco")
-    public Taco taco() {
-        return new Taco();
-    }
-
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
     }
 
     @GetMapping
-    public String showDesignForm() {
+    public String showDesignForm(Model model) {
+        model.addAttribute("taco", new Taco());
         return "design";
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco taco, Errors errors,
-            @ModelAttribute Order order) {
-
+    public String processDesign(@Valid @ModelAttribute("taco") Taco taco,
+                                Errors errors,
+                                @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
