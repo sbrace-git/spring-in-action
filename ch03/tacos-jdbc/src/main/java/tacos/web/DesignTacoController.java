@@ -5,20 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import tacos.model.Ingredient;
+import tacos.model.Order;
 import tacos.model.Taco;
 import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static tacos.model.Ingredient.Type;
@@ -26,6 +21,7 @@ import static tacos.model.Ingredient.Type;
 @Slf4j
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("order")
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
@@ -48,29 +44,36 @@ public class DesignTacoController {
         }
     }
 
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
     }
 
     @GetMapping
-    public String showDesignForm(Model model) {
-        model.addAttribute("design", new Taco());
+    public String showDesignForm() {
         return "design";
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, HttpSession httpSession) {
+    public String processDesign(@Valid Taco taco, Errors errors,
+            @ModelAttribute Order order) {
+
         if (errors.hasErrors()) {
             return "design";
         }
-        log.info("Processing design : {}", design);
-        Taco taco = tacoRepository.save(design);
-        @SuppressWarnings("unchecked")
-        List<Taco> tacos = Optional.ofNullable(httpSession.getAttribute("tacos"))
-                .map(obj -> (List<Taco>) obj)
-                .orElseGet(ArrayList::new);
-        tacos.add(taco);
-        httpSession.setAttribute("tacos", tacos);
+
+        Taco saved = tacoRepository.save(taco);
+        order.addTaco(saved);
+
         return "redirect:/orders/current";
     }
 
