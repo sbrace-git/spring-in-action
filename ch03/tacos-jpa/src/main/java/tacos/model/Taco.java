@@ -17,13 +17,17 @@ public class Taco {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "CREATEDAT")
     private Date createdAt;
 
     @NotNull
     @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
-    @ManyToMany(targetEntity = Ingredient.class)
+    @OneToMany(targetEntity = Ingredient.class)
+    @JoinTable(name = "Taco_Ingredients",
+            joinColumns = @JoinColumn(name = "taco", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient", referencedColumnName = "id"))
     @NotEmpty(message = "You must choose at least 1 ingredient")
     private List<Ingredient> ingredients;
 
