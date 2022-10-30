@@ -43,4 +43,4 @@ alter table Taco_Order_Tacos
 alter table Taco_Order_Tacos
     add foreign key (taco) references Taco(id);
 
-create sequence hibernate_sequence start with 1 increment by 1;
+create sequence if not exists hibernate_sequence start with 1 increment by 1;
