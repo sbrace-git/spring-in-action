@@ -6,6 +6,8 @@ import tacos.converter.IngredientByIdConverter;
 import tacos.model.Ingredient;
 import tacos.repository.IngredientRepository;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,10 +20,10 @@ public class IngredientByIdConverterTest {
     @BeforeEach
     public void setup() {
         IngredientRepository ingredientRepository = mock(IngredientRepository.class);
-        when(ingredientRepository.findOne("AAAA"))
-                .thenReturn(new Ingredient("AAAA", "TEST INGREDIENT", Type.CHEESE));
-        when(ingredientRepository.findOne("ZZZZ"))
-                .thenReturn(null);
+        when(ingredientRepository.findById("AAAA"))
+                .thenReturn(Optional.of(new Ingredient("AAAA", "TEST INGREDIENT", Type.CHEESE)));
+        when(ingredientRepository.findById("ZZZZ"))
+                .thenReturn(Optional.empty());
 
         ingredientByIdConverter = new IngredientByIdConverter(ingredientRepository);
     }

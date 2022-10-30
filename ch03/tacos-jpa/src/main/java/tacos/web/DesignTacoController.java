@@ -13,6 +13,7 @@ import tacos.repository.IngredientRepository;
 import tacos.repository.TacoRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,9 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = ingredientRepository.findAll();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Iterable<Ingredient> all = ingredientRepository.findAll();
+        all.forEach(ingredients::add);
         Type[] types = Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(),
