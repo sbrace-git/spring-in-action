@@ -7,14 +7,40 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+
+import javax.sql.DataSource;
 
 @Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    // JDBC
+
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        UserDetails user = User
+                .withUsername("user")
+                .password("{bcrypt}$2a$10$KApEB4t5p994/4YbA6kPhOTrc1CBiugqP32QuBataT300UMyrK5xq")
+                .roles("USER")
+                .build();
+        UserDetails admin = User
+                .withUsername("admin")
+                .password("{bcrypt}$2a$10$ZOqPFlZni1IhxVGDvDZ3VuvvAnQZW8NDOwP./rs5I/iqnOVh.PR6m")
+                .roles("ADMIN", "USER")
+                .build();
+        jdbcUserDetailsManager.createUser(user);
+        jdbcUserDetailsManager.createUser(admin);
+        return jdbcUserDetailsManager;
+    }
+
+
+
+    /*
+    //In Memory
+
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User
@@ -41,4 +67,6 @@ public class SecurityConfig {
         // main adminPassword = {bcrypt}$2a$10$ZOqPFlZni1IhxVGDvDZ3VuvvAnQZW8NDOwP./rs5I/iqnOVh.PR6m
         log.info("main adminPassword = {}", adminPassword);
     }
+
+    */
 }
