@@ -69,6 +69,9 @@ public class Order {
     )
     private List<Taco> tacos = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     public boolean addTaco(Taco taco) {
         return tacos.add(taco);
     }
