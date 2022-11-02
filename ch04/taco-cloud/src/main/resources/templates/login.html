@@ -8,7 +8,7 @@
         <h1>Login</h1>
         <img th:src="@{/images/TacoCloud.png}">
 
-        <div th:if="${error}">
+        <div th:if="${param.error}" style="color: red">
             Unable to login. Check Your username and password.
         </div>
 
