@@ -26,3 +26,7 @@ logging:
 #  file:
 #    path: D:\common\temp
 #    name: taco-cloud.log
+
+taco:
+  orders:
+    pageSize: 21
