@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import tacos.model.Order;
 import tacos.model.User;
+import tacos.property.OrderProperties;
 import tacos.repository.OrderRepository;
 
 import javax.validation.Valid;
@@ -28,15 +29,11 @@ public class OrderController {
 
     private OrderRepository orderRepository;
 
-    private int pageSize;
+    private OrderProperties orderProperties;
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderProperties orderProperties) {
         this.orderRepository = orderRepository;
+        this.orderProperties = orderProperties;
     }
 
     @GetMapping("/current")
@@ -60,7 +57,7 @@ public class OrderController {
 
     @GetMapping
     public String orderForUser(@AuthenticationPrincipal User user, Model model) {
-        PageRequest pageRequest = PageRequest.of(0, pageSize);
+        PageRequest pageRequest = PageRequest.of(0, orderProperties.getPageSize());
         model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageRequest));
         return "orderList";
     }
