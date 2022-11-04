@@ -1,0 +1,35 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://localhost:3307/tacocloud
+    username: root
+    password: 1111
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      # set always at first time
+      mode: never
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+server:
+  port: 9090
+
+logging:
+  level:
+    root: info
+    org.springframework.security: debug
+    tacos: debug
+#    todo : config logging.file.path
+#  file:
+#    path: D:\common\temp
+#    name: taco-cloud.log
+
+taco:
+  orders:
+    pageSize: 21
