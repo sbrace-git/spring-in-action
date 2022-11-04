@@ -10,7 +10,7 @@
     </parent>
     <groupId>sia</groupId>
     <artifactId>taco-cloud-mvn-modules</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <name>taco-cloud-mvn-modules</name>
     <description>taco-cloud-mvn-modules</description>
     <properties>
