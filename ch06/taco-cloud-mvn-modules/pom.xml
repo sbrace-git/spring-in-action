@@ -2,6 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>tocacloud-domain</module>
+        <module>tacocloud-data</module>
+        <module>tacocloud-web</module>
+        <module>tacocloud-security</module>
+        <module>taco-cloud</module>
+    </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -11,10 +19,11 @@
     <groupId>sia</groupId>
     <artifactId>taco-cloud-mvn-modules</artifactId>
     <version>0.0.6-SNAPSHOT</version>
-    <name>taco-cloud-mvn-modules</name>
-    <description>taco-cloud-mvn-modules</description>
+    <name>tacos-cloud-mvn-modules</name>
+    <description>tacos-cloud-mvn-modules</description>
     <properties>
         <java.version>1.8</java.version>
+        <tacocloud.version>${project.version}</tacocloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -84,22 +93,5 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
