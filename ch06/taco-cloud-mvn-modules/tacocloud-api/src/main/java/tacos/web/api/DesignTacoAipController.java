@@ -1,4 +1,5 @@
 package tacos.web.api;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,17 +18,17 @@ import tacos.repository.TacoRepository;
 @RequestMapping(path="/design",
         produces="application/json")
 @CrossOrigin(origins="*")
-public class DesignTacoController {
+public class DesignTacoAipController {
     private TacoRepository tacoRepository;
 //    @Autowired
 //    EntityLinks entityLinks;
-    public DesignTacoController(TacoRepository tacoRepo) {
+    public DesignTacoAipController(TacoRepository tacoRepo) {
         this.tacoRepository = tacoRepo;
     }
     @GetMapping("/recent")
-    public Iterable<Taco> recentTacos() {
+    public List<Taco> recentTacos() {
         PageRequest page = PageRequest.of(
                 0, 12, Sort.by("createdAt").descending());
-        return tacoRepository.findAll();
+        return tacoRepository.findAll(page).getContent();
     }
 }
