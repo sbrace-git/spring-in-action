@@ -28,6 +28,11 @@
             <artifactId>tacocloud-security</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>sia</groupId>
+            <artifactId>tacocloud-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

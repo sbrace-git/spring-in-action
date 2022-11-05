@@ -9,6 +9,8 @@
         <module>tacocloud-web</module>
         <module>tacocloud-security</module>
         <module>taco-cloud</module>
+        <module>tacocloud-api</module>
+        <module>tacocloud-ui</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
