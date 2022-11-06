@@ -1,3 +1,6 @@
 spring:
   profiles:
     active: dev
+  data:
+    rest:
+      base-path: /api
