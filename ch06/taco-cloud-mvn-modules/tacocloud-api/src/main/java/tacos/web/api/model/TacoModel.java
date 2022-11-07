@@ -24,6 +24,6 @@ public class TacoModel extends RepresentationModel<TacoModel> {
         this.createdAt = taco.getCreatedAt();
         this.name = taco.getName();
         this.ingredients = ingredientModelAssembler.toCollectionModel(taco.getIngredients());
-        add(linkTo(methodOn(DesignTacoAipController.class).tacoById(taco.getId())).withRel("href"));
+        add(linkTo(methodOn(DesignTacoAipController.class).tacoById(taco.getId())).withRel("self"));
     }
 }
