@@ -1,4 +1,4 @@
-package tacos.web.api;
+package tacos.web.api.controller;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;

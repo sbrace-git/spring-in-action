@@ -1,4 +1,4 @@
-package tacos.web.api;
+package tacos.web.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +17,6 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class DesignTacoAipController {
     private TacoRepository tacoRepository;
-
-    @Autowired
-//    EntityLinks entityLinks;
 
     public DesignTacoAipController(TacoRepository tacoRepo) {
         this.tacoRepository = tacoRepo;
