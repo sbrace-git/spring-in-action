@@ -2,13 +2,16 @@ package tacos.web.api.controller;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import tacos.model.Order;
+import tacos.model.User;
 import tacos.repository.OrderRepository;
 import tacos.web.api.property.OrderProperties;
 
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin(origins = "*")
 public class OrderApiController {
 
     private OrderRepository orderRepository;
@@ -18,6 +21,17 @@ public class OrderApiController {
     public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties) {
         this.orderRepository = orderRepository;
         this.orderProperties = orderProperties;
+    }
+
+    @GetMapping(produces="application/json")
+    public Iterable<Order> allOrders() {
+        return orderRepository.findAll();
+    }
+
+    @PostMapping(consumes="application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order postOrder(@RequestBody Order order) {
+        return orderRepository.save(order);
     }
 
     @PatchMapping(path="/{orderId}", consumes="application/json")

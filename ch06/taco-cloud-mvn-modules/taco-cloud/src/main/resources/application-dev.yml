@@ -25,6 +25,7 @@ logging:
     root: info
     org.springframework.security: debug
     tacos: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
 #    todo : config logging.file.path
 #  file:
 #    path: D:\common\temp
