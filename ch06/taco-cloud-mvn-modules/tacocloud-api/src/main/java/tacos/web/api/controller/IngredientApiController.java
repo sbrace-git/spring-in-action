@@ -1,9 +1,8 @@
 package tacos.web.api.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import tacos.model.Ingredient;
 import tacos.repository.IngredientRepository;
 
@@ -23,4 +22,10 @@ public class IngredientApiController {
         return ingredientRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Ingredient> ingredientById(@PathVariable("id") String id) {
+        return ingredientRepository.findById(id)
+                .map(ingredient -> new ResponseEntity<>(ingredient, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
 }
