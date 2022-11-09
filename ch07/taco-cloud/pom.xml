@@ -11,6 +11,7 @@
         <module>taco-cloud</module>
         <module>tacocloud-api</module>
         <module>tacocloud-ui</module>
+        <module>tacocloud-restclient</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,7 +22,7 @@
     <groupId>sia</groupId>
     <artifactId>taco-cloud-parent</artifactId>
     <version>0.0.7-SNAPSHOT</version>
-    <name>tacos-cloud</name>
+    <name>tacos-cloud-parent</name>
     <description>tacos-cloud</description>
     <properties>
         <java.version>1.8</java.version>

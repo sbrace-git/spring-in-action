@@ -7,7 +7,7 @@ import tacos.model.Ingredient;
 import tacos.repository.IngredientRepository;
 
 @RestController
-@RequestMapping(path = "/ingredientsx", produces = "application/json")
+@RequestMapping(path = "/ingredients", produces = "application/json")
 @CrossOrigin(origins = "*")
 public class IngredientApiController {
 

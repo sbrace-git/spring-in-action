@@ -22,9 +22,9 @@ server:
 
 logging:
   level:
-    root: info
-    org.springframework.security: debug
-    tacos: debug
+    root: debug
+#    org.springframework.security: debug
+#    tacos: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
 #    todo : config logging.file.path
 #  file:

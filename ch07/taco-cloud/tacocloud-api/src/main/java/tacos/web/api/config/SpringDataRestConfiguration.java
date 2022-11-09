@@ -1,15 +1,28 @@
-package tacos.web.api;
+package tacos.web.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import tacos.model.Ingredient;
 import tacos.model.Taco;
 
 @Configuration
 public class SpringDataRestConfiguration {
+    @Bean
+    public RepositoryRestConfigurer repositoryRestConfigurer() {
+        return new RepositoryRestConfigurer() {
+            @Override
+            public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+                config.exposeIdsFor(Ingredient.class);
+            }
+        };
+    }
 
     @Bean
     public RepresentationModelProcessor<PagedModel<EntityModel<Taco>>>
@@ -27,5 +40,4 @@ public class SpringDataRestConfiguration {
             }
         };
     }
-
 }
