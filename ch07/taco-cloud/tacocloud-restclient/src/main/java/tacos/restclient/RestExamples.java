@@ -26,9 +26,10 @@ public class RestExamples {
     public CommandLineRunner fetchIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- GET -------------------------");
-            log.info("GETTING INGREDIENT BY IDE");
-            log.info("Ingredient:  " + tacoCloudClient.getIngredientById("CHED"));
-            log.info("GETTING ALL INGREDIENTS");
+            log.info("GETTING INGREDIENT BY ID");
+            log.info("Ingredient 1:  {}", tacoCloudClient.getIngredientById1("CHED"));
+            log.info("Ingredient 2:  {}", tacoCloudClient.getIngredientById2("CHED"));
+            log.info("Ingredient 3:  {}", tacoCloudClient.getIngredientById3("CHED"));
         };
     }
 }
