@@ -30,6 +30,7 @@ public class RestExamples {
             log.info("Ingredient 1:  {}", tacoCloudClient.getIngredientById1("CHED"));
             log.info("Ingredient 2:  {}", tacoCloudClient.getIngredientById2("CHED"));
             log.info("Ingredient 3:  {}", tacoCloudClient.getIngredientById3("CHED"));
+            log.info("Ingredient 4:  {}", tacoCloudClient.getIngredientById4("CHED"));
         };
     }
 }

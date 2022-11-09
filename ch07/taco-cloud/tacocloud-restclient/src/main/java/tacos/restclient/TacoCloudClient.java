@@ -1,6 +1,7 @@
 package tacos.restclient;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -48,4 +49,16 @@ public class TacoCloudClient {
                 .build(urlVariables);
         return restTemplate.getForObject(url, Ingredient.class);
     }
+
+    /*
+     * Use getForEntity() instead of getForObject()
+     */
+     public Ingredient getIngredientById4(String ingredientId) {
+       ResponseEntity<Ingredient> responseEntity =
+           restTemplate.getForEntity("http://localhost:8080/api/ingredients/{id}",
+               Ingredient.class, ingredientId);
+       log.info("Fetched time: " +
+               responseEntity.getHeaders().getDate());
+       return responseEntity.getBody();
+     }
 }
