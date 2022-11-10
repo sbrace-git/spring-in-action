@@ -82,7 +82,7 @@ public class TacoCloudClient {
     // POST examples
     //
     public Ingredient createIngredient1(Ingredient ingredient) {
-        return restTemplate.postForObject("http://localhost:8080/ingredients", ingredient, Ingredient.class);
+        return restTemplate.postForObject("http://localhost:8080/api/ingredients", ingredient, Ingredient.class);
     }
 
     /*
@@ -94,12 +94,12 @@ public class TacoCloudClient {
      */
 
     public java.net.URI createIngredient2(Ingredient ingredient) {
-        return restTemplate.postForLocation("http://localhost:8080/ingredients", ingredient);
+        return restTemplate.postForLocation("http://localhost:8080/api/ingredients", ingredient);
     }
 
 
     public Ingredient createIngredient3(Ingredient ingredient) {
-        ResponseEntity<Ingredient> responseEntity = restTemplate.postForEntity("http://localhost:8080/ingredients", ingredient, Ingredient.class);
+        ResponseEntity<Ingredient> responseEntity = restTemplate.postForEntity("http://localhost:8080/api/ingredients", ingredient, Ingredient.class);
         log.info("New resource created at {}", responseEntity.getHeaders().getLocation());
         return responseEntity.getBody();
     }

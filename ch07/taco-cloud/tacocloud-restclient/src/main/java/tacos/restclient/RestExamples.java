@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 import tacos.model.Ingredient;
 
+import java.net.URI;
 import java.util.List;
 
 @SpringBootConfiguration
@@ -59,23 +60,21 @@ public class RestExamples {
             Ingredient crea = tacoCloudClient.getIngredientById1("crea");
             log.info("crea:  {}", crea);
 
-//            Ingredient ingredient1 = tacoCloudClient.createIngredient1(new Ingredient("creat1", "creat1 name", Ingredient.Type.VEGGIES));
-//            Ingredient ingredient11 = tacoCloudClient.getIngredientById1("creat1");
-//            log.info("ingredient1:  {}", ingredient1);
-//            log.info("ingredient11:  {}", ingredient11);
-//
-//
-//            URI ingredient2 = tacoCloudClient.createIngredient2(new Ingredient("creat2", "creat2 name", Ingredient.Type.VEGGIES));
-//            Ingredient ingredient22 = tacoCloudClient.getIngredientById2("creat2");
-//            log.info("ingredient2:  {}", ingredient2);
-//            log.info("ingredient22:  {}", ingredient22);
-//
-//
-//            Ingredient ingredient3 = tacoCloudClient.createIngredient3(new Ingredient("creat3", "creat3 name", Ingredient.Type.VEGGIES));
-//            Ingredient ingredient33 = tacoCloudClient.getIngredientById3("creat3");
-//            log.info("ingredient3:  {}", ingredient3);
-//            log.info("ingredient33:  {}", ingredient33);
+        };
+    }
 
+    @Bean
+    public CommandLineRunner postIngredients(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("----------------------- POST -------------------------");
+            Ingredient ingredient1 = tacoCloudClient.createIngredient1(new Ingredient("cre1", "cre1 name", Ingredient.Type.VEGGIES));
+            log.info("ingredient1:  {}", ingredient1);
+
+            URI ingredient2 = tacoCloudClient.createIngredient2(new Ingredient("cre2", "cre2 name", Ingredient.Type.VEGGIES));
+            log.info("ingredient2:  {}", ingredient2);
+
+            Ingredient ingredient3 = tacoCloudClient.createIngredient3(new Ingredient("cre3", "cre3 name", Ingredient.Type.VEGGIES));
+            log.info("ingredient3:  {}", ingredient3);
         };
     }
 
