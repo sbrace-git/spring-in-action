@@ -1,6 +1,8 @@
 package tacos.restclient;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,6 +11,7 @@ import tacos.model.Ingredient;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,6 +31,7 @@ public class TacoCloudClient {
         return restTemplate.getForObject("http://localhost:8080/api/ingredients/{id}",
                 Ingredient.class, ingredientId);
     }
+
     /*
      * Specify parameters with a map
      */
@@ -53,12 +57,20 @@ public class TacoCloudClient {
     /*
      * Use getForEntity() instead of getForObject()
      */
-     public Ingredient getIngredientById4(String ingredientId) {
-       ResponseEntity<Ingredient> responseEntity =
-           restTemplate.getForEntity("http://localhost:8080/api/ingredients/{id}",
-               Ingredient.class, ingredientId);
-       log.info("Fetched time: " +
-               responseEntity.getHeaders().getDate());
-       return responseEntity.getBody();
-     }
+    public Ingredient getIngredientById4(String ingredientId) {
+        ResponseEntity<Ingredient> responseEntity =
+                restTemplate.getForEntity("http://localhost:8080/api/ingredients/{id}",
+                        Ingredient.class, ingredientId);
+        log.info("Fetched time: " +
+                responseEntity.getHeaders().getDate());
+        return responseEntity.getBody();
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        return restTemplate.exchange(
+                        "http://localhost:8080/ingredients", HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<Ingredient>>() {
+                        })
+                .getBody();
+    }
 }

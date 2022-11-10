@@ -7,6 +7,9 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
+import tacos.model.Ingredient;
+
+import java.util.List;
 
 @SpringBootConfiguration
 @ComponentScan
@@ -31,6 +34,12 @@ public class RestExamples {
             log.info("Ingredient 2:  {}", tacoCloudClient.getIngredientById2("CHED"));
             log.info("Ingredient 3:  {}", tacoCloudClient.getIngredientById3("CHED"));
             log.info("Ingredient 4:  {}", tacoCloudClient.getIngredientById4("CHED"));
+            log.info("GETTING ALL INGREDIENTS");
+            List<Ingredient> ingredients = tacoCloudClient.getAllIngredients();
+            log.info("All ingredients:");
+            for (Ingredient ingredient : ingredients) {
+                log.info("   - " + ingredient);
+            }
         };
     }
 }
