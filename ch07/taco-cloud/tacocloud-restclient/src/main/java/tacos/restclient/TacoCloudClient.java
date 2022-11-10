@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import tacos.model.Ingredient;
+import tacos.web.api.model.TacoModel;
 
 import java.net.URI;
 import java.util.Collection;
@@ -119,6 +120,13 @@ public class TacoCloudClient {
         CollectionModel<Ingredient> ingredients = traverson.follow("ingredients").toObject(parameterizedTypeReference);
         Collection<Ingredient> content = ingredients.getContent();
         return content;
+    }
+
+    public Collection<TacoModel> recent() {
+        ParameterizedTypeReference<CollectionModel<TacoModel>> parameterizedTypeReference = new ParameterizedTypeReference<CollectionModel<TacoModel>>() {
+        };
+        CollectionModel<TacoModel> tacos = traverson.follow("tacos").follow("recent").toObject(parameterizedTypeReference);
+        return tacos.getContent();
     }
 
 }

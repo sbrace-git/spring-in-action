@@ -10,6 +10,8 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.web.client.RestTemplate;
 import tacos.model.Ingredient;
+import tacos.model.Taco;
+import tacos.web.api.model.TacoModel;
 
 import java.net.URI;
 import java.util.Collection;
@@ -34,7 +36,7 @@ public class RestExamples {
         return new Traverson(URI.create("http://localhost:8080/api"), MediaTypes.HAL_JSON);
     }
 
-//    @Bean
+    //    @Bean
     public CommandLineRunner fetchIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- GET -------------------------");
@@ -52,7 +54,7 @@ public class RestExamples {
         };
     }
 
-//    @Bean
+    //    @Bean
     public CommandLineRunner putIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- PUT -------------------------");
@@ -71,7 +73,7 @@ public class RestExamples {
         };
     }
 
-//    @Bean
+    //    @Bean
     public CommandLineRunner postIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- POST -------------------------");
@@ -86,7 +88,7 @@ public class RestExamples {
         };
     }
 
-//    @Bean
+    //    @Bean
     public CommandLineRunner deleteIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- DELETE -------------------------");
@@ -102,12 +104,21 @@ public class RestExamples {
         };
     }
 
-    @Bean
+    //    @Bean
     public CommandLineRunner allIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- ALL INGREDIENTS -------------------------");
             Collection<Ingredient> ingredients = tacoCloudClient.allIngredients();
             ingredients.forEach(ingredient -> log.info("ingredient = 【{}】", ingredient));
+        };
+    }
+
+    @Bean
+    public CommandLineRunner recent(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("----------------------- RECENT -------------------------");
+            Collection<TacoModel> recent = tacoCloudClient.recent();
+            recent.forEach(taco -> log.info("ingredient = 【{}】", taco));
         };
     }
 }

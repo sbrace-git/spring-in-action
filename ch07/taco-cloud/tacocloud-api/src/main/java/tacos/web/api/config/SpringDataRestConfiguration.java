@@ -39,7 +39,7 @@ public class SpringDataRestConfiguration {
                 resource.add(
                         links.linkFor(Taco.class)
                                 .slash("recent")
-                                .withRel("recents"));
+                                .withRel("recent"));
                 return resource;
             }
         };
