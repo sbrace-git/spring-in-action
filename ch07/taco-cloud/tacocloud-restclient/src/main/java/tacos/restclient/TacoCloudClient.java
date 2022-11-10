@@ -129,4 +129,10 @@ public class TacoCloudClient {
         return tacos.getContent();
     }
 
+    public Ingredient addIngredient(Ingredient ingredient) {
+        String ingredientsUrl = traverson.follow("ingredients")
+                .asLink()
+                .getHref();
+        return restTemplate.postForObject(ingredientsUrl, ingredient, Ingredient.class);
+    }
 }

@@ -10,7 +10,6 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.web.client.RestTemplate;
 import tacos.model.Ingredient;
-import tacos.model.Taco;
 import tacos.web.api.model.TacoModel;
 
 import java.net.URI;
@@ -113,12 +112,21 @@ public class RestExamples {
         };
     }
 
-    @Bean
+    //    @Bean
     public CommandLineRunner recent(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- RECENT -------------------------");
             Collection<TacoModel> recent = tacoCloudClient.recent();
             recent.forEach(taco -> log.info("ingredient = 【{}】", taco));
+        };
+    }
+
+    @Bean
+    public CommandLineRunner traversonAddIngredient(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("----------------------- TRAVERSON ADD INGREDIENT -------------------------");
+            Ingredient ingredient = tacoCloudClient.addIngredient(new Ingredient("TRAV", "TRAV name", Ingredient.Type.VEGGIES));
+            log.info("ingredient = 【{}】", ingredient);
         };
     }
 }
