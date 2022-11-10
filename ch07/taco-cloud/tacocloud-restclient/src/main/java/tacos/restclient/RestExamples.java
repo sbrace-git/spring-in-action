@@ -35,7 +35,7 @@ public class RestExamples {
         return new Traverson(URI.create("http://localhost:8080/api"), MediaTypes.HAL_JSON);
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner fetchIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- GET -------------------------");
@@ -53,7 +53,7 @@ public class RestExamples {
         };
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner putIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- PUT -------------------------");
@@ -72,7 +72,7 @@ public class RestExamples {
         };
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner postIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- POST -------------------------");
@@ -87,7 +87,7 @@ public class RestExamples {
         };
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner deleteIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- DELETE -------------------------");
@@ -103,7 +103,7 @@ public class RestExamples {
         };
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner allIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- ALL INGREDIENTS -------------------------");
@@ -112,7 +112,7 @@ public class RestExamples {
         };
     }
 
-    //    @Bean
+    @Bean
     public CommandLineRunner recent(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("----------------------- RECENT -------------------------");
