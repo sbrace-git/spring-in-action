@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 import tacos.model.Ingredient;
 
-import java.net.URI;
 import java.util.List;
 
 @SpringBootConfiguration
@@ -77,6 +76,22 @@ public class RestExamples {
 //            log.info("ingredient3:  {}", ingredient3);
 //            log.info("ingredient33:  {}", ingredient33);
 
+        };
+    }
+
+    @Bean
+    public CommandLineRunner deleteIngredients(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("----------------------- DELETE -------------------------");
+            Ingredient crea1 = tacoCloudClient.getIngredientById1("crea");
+            log.info("crea1:  {}", crea1);
+            tacoCloudClient.deleteIngredient("crea");
+            try {
+                Ingredient crea2 = tacoCloudClient.getIngredientById1("crea");
+                log.info("crea2:  {}", crea2);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         };
     }
 }
