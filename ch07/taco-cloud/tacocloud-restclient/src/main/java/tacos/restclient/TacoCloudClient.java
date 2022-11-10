@@ -73,4 +73,45 @@ public class TacoCloudClient {
                         })
                 .getBody();
     }
+
+    //
+    // PUT examples
+    //
+    public void putIngredient(Ingredient ingredient) {
+        restTemplate.put("http://localhost:8080/api/ingredients/{id}",
+                ingredient, ingredient.getId());
+    }
+
+    //
+    // POST examples
+    //
+    public Ingredient createIngredient1(Ingredient ingredient) {
+        return restTemplate.postForObject("http://localhost:8080/ingredients",
+                ingredient, Ingredient.class);
+    }
+
+    /*
+     * Alternate implementations...
+     * The next two methods are alternative implementations of
+     * createIngredient() as shown in chapter 6. If you'd like to try
+     * any of them out, comment out the previous method and uncomment
+     * the variant you want to use.
+     */
+
+  public java.net.URI createIngredient2(Ingredient ingredient) {
+    return restTemplate.postForLocation("http://localhost:8080/ingredients",
+        ingredient);
+  }
+
+
+  public Ingredient createIngredient3(Ingredient ingredient) {
+    ResponseEntity<Ingredient> responseEntity =
+           restTemplate.postForEntity("http://localhost:8080/ingredients",
+                              ingredient,
+                              Ingredient.class);
+    log.info("New resource created at {}",
+             responseEntity.getHeaders().getLocation());
+    return responseEntity.getBody();
+  }
+
 }

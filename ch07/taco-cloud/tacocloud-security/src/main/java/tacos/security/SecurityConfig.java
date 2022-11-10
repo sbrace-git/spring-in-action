@@ -34,7 +34,7 @@ public class SecurityConfig {
             .and().logout()
                     .logoutSuccessUrl("/")
             .and().csrf()
-                .ignoringAntMatchers("/h2-console/**", "/ingredients/**", "/design", "/orders/**")
+                .ignoringAntMatchers("/h2-console/**", "/ingredients/**", "/design", "/orders/**","/api/**")
             .and().headers()
                 .frameOptions().sameOrigin();
 
