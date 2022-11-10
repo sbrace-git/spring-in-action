@@ -2,7 +2,8 @@ package tacos.restclient;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import tacos.model.Ingredient;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +21,13 @@ import java.util.Map;
 @Slf4j
 public class TacoCloudClient {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    public TacoCloudClient(RestTemplate restTemplate) {
+    private final Traverson traverson;
+
+    public TacoCloudClient(RestTemplate restTemplate, Traverson traverson) {
         this.restTemplate = restTemplate;
+        this.traverson = traverson;
     }
 
     /*
@@ -102,6 +107,18 @@ public class TacoCloudClient {
         ResponseEntity<Ingredient> responseEntity = restTemplate.postForEntity("http://localhost:8080/api/ingredients", ingredient, Ingredient.class);
         log.info("New resource created at {}", responseEntity.getHeaders().getLocation());
         return responseEntity.getBody();
+    }
+
+
+    /*
+     * Traverson
+     */
+    public Collection<Ingredient> allIngredients() {
+        ParameterizedTypeReference<CollectionModel<Ingredient>> parameterizedTypeReference = new ParameterizedTypeReference<CollectionModel<Ingredient>>() {
+        };
+        CollectionModel<Ingredient> ingredients = traverson.follow("ingredients").toObject(parameterizedTypeReference);
+        Collection<Ingredient> content = ingredients.getContent();
+        return content;
     }
 
 }
