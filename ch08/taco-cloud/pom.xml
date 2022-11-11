@@ -12,6 +12,7 @@
         <module>tacocloud-api</module>
         <module>tacocloud-ui</module>
         <module>tacocloud-restclient</module>
+        <module>tacocloud-messaging-jms</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

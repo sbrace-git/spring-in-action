@@ -16,15 +16,23 @@ spring:
       mode: never
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
-
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+  artemis:
+    broker-url: tcp://localhost:61616
+    user: username
+    password: password
+    embedded:
+      enabled: false
 server:
   port: 8080
 
 logging:
   level:
     root: info
-#    org.springframework.security: debug
-#    tacos: debug
+    #    org.springframework.security: debug
+    tacos.messaging: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
 #    todo : config logging.file.path
 #  file:

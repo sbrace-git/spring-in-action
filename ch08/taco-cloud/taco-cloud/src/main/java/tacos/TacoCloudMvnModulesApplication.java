@@ -21,27 +21,6 @@ public class TacoCloudMvnModulesApplication {
         SpringApplication.run(TacoCloudMvnModulesApplication.class, args);
     }
 
-    @Bean
-    @Profile("dev")
-    Object bean1() {
-        log.info("bean1");
-        return new Object();
-    }
-
-    @Bean
-    @Profile("!prod")
-    Object bean2() {
-        log.info("bean2");
-        return new Object();
-    }
-
-    @Bean
-    @Profile({"test","prod"})
-    Object bean3() {
-        log.info("bean3");
-        return new Object();
-    }
-
     // To avoid 404s when using Angular HTML 5 routing
     @Bean
     ErrorViewResolver supportPathBasedLocationStrategyWithoutHashes() {
