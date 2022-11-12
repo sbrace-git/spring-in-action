@@ -1,11 +1,11 @@
-package tacos.tilchen.messaging.jms;
+package tacos.kitchen.messaging.jms;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
-import tacos.tilchen.messaging.domain.Order;
-import tacos.tilchen.messaging.receiver.OrderReceiver;
+import tacos.kitchen.messaging.domain.Order;
+import tacos.kitchen.messaging.receiver.OrderReceiver;
 
 import javax.jms.JMSException;
 import javax.jms.Message;

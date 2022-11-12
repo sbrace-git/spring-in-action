@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tacos.messaging.service.OrderMessagingService;
 import tacos.model.Order;
 
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
@@ -13,13 +14,20 @@ public class JmsOrderMessagingServiceImpl implements OrderMessagingService {
 
     private JmsTemplate jmsTemplate;
 
-    public JmsOrderMessagingServiceImpl(JmsTemplate jmsTemplate) {
+    private Destination orderQueue;
+
+    private Destination orderTopic;
+
+    public JmsOrderMessagingServiceImpl(JmsTemplate jmsTemplate, Destination orderQueue, Destination orderTopic) {
         this.jmsTemplate = jmsTemplate;
+        this.orderQueue = orderQueue;
+        this.orderTopic = orderTopic;
     }
 
     @Override
     public void sendOrder(Order order) {
-        jmsTemplate.convertAndSend("tacocloud.order.queue", order, this::addOrderSource);
+        jmsTemplate.convertAndSend(orderQueue, order, this::addOrderSource);
+        jmsTemplate.convertAndSend(orderTopic, order, this::addOrderSource);
     }
 
     private Message addOrderSource(Message message) throws JMSException {

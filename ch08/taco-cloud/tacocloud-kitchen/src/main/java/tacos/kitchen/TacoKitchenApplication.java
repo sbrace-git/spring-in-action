@@ -1,12 +1,8 @@
-package tacos.tilchen;
+package tacos.kitchen;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import tacos.tilchen.messaging.domain.Order;
-import tacos.tilchen.messaging.receiver.OrderReceiver;
 
 @Slf4j
 @SpringBootApplication

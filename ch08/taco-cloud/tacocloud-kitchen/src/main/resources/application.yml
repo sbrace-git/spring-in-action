@@ -11,3 +11,6 @@ spring:
     password: password
     embedded:
       enabled: false
+logging:
+  level:
+    root: info

@@ -1,4 +1,4 @@
-package tacos.tilchen.messaging.domain;
+package tacos.kitchen.messaging.domain;
 
 import lombok.Data;
 

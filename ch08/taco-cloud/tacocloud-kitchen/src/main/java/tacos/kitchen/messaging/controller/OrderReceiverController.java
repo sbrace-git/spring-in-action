@@ -1,11 +1,11 @@
-package tacos.tilchen.messaging.controller;
+package tacos.kitchen.messaging.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tacos.tilchen.messaging.domain.Order;
-import tacos.tilchen.messaging.receiver.OrderReceiver;
+import tacos.kitchen.messaging.domain.Order;
+import tacos.kitchen.messaging.receiver.OrderReceiver;
 
 @Slf4j
 @Controller

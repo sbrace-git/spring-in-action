@@ -1,9 +1,9 @@
-package tacos.tilchen.messaging.jms;
+package tacos.kitchen.messaging.jms;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import tacos.tilchen.messaging.domain.Order;
+import tacos.kitchen.messaging.domain.Order;
 
 import java.util.HashMap;
 import java.util.Map;

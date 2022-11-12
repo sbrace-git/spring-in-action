@@ -2,6 +2,7 @@ package tacos.messaging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.apache.activemq.artemis.jms.client.ActiveMQTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
@@ -28,9 +29,13 @@ public class MessagingConfig {
         return messageConverter;
     }
 
-    @Bean
+    @Bean("orderQueue")
     public Destination orderQueue() {
         return new ActiveMQQueue("tacocloud.order.queue");
     }
 
+    @Bean("orderTopic")
+    public Destination orderTopic() {
+        return new ActiveMQTopic("tacocloud.order.topic");
+    }
 }
