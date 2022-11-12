@@ -2,10 +2,9 @@ package tacos.web.api.controller;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import tacos.messaging.service.OrderMessagingService;
 import tacos.model.Order;
-import tacos.model.User;
 import tacos.repository.OrderRepository;
 import tacos.web.api.property.OrderProperties;
 
@@ -18,23 +17,28 @@ public class OrderApiController {
 
     private OrderProperties orderProperties;
 
-    public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties) {
+    private OrderMessagingService orderMessagingService;
+
+    public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties,OrderMessagingService orderMessagingService) {
         this.orderRepository = orderRepository;
         this.orderProperties = orderProperties;
+        this.orderMessagingService = orderMessagingService;
     }
 
-    @GetMapping(produces="application/json")
+    @GetMapping(produces = "application/json")
     public Iterable<Order> allOrders() {
         return orderRepository.findAll();
     }
 
-    @PostMapping(consumes="application/json")
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Order postOrder(@RequestBody Order order) {
-        return orderRepository.save(order);
+        Order save = orderRepository.save(order);
+        orderMessagingService.sendOrder(save);
+        return save;
     }
 
-    @PatchMapping(path="/{orderId}", consumes="application/json")
+    @PatchMapping(path = "/{orderId}", consumes = "application/json")
     public Order patchOrder(@PathVariable("orderId") Long orderId,
                             @RequestBody Order patch) {
         Order order = orderRepository.findById(orderId).get();
@@ -66,10 +70,11 @@ public class OrderApiController {
     }
 
     @DeleteMapping("/{orderId}")
-    @ResponseStatus(code= HttpStatus.NO_CONTENT)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteOrder(@PathVariable("orderId") Long orderId) {
         try {
             orderRepository.deleteById(orderId);
-        } catch (EmptyResultDataAccessException ignored) {}
+        } catch (EmptyResultDataAccessException ignored) {
+        }
     }
 }
