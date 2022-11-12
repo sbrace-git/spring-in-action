@@ -30,7 +30,7 @@ public class JmsOrderReceiver implements OrderReceiver {
 
     @Override
     public Order receiveOrder() {
-        Message receive = jmsTemplate.receive();
+        Message receive = jmsTemplate.receive("tacocloud.order.queue");
         try {
             String x_order_source = receive.getStringProperty("X_ORDER_SOURCE");
             log.info("receiveOrder x_order_source = {}", x_order_source);
