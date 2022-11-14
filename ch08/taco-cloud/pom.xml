@@ -14,6 +14,7 @@
         <module>tacocloud-restclient</module>
         <module>tacocloud-messaging-jms</module>
         <module>tacocloud-kitchen</module>
+        <module>tacocloud-messaging-rabbit</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

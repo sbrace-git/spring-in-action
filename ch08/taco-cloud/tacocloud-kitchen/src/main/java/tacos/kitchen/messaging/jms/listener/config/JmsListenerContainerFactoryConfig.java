@@ -1,4 +1,4 @@
-package tacos.kitchen.messaging.listener.config;
+package tacos.kitchen.messaging.jms.listener.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

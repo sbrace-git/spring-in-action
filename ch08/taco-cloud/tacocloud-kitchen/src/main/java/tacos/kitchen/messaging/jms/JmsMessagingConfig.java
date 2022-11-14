@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class MessagingConfig {
+public class JmsMessagingConfig {
     @Bean
     public MappingJackson2MessageConverter messageConverter() {
         MappingJackson2MessageConverter messageConverter =

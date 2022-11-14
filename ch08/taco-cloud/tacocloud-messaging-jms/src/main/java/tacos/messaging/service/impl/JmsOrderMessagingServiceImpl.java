@@ -1,5 +1,6 @@
 package tacos.messaging.service.impl;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import tacos.messaging.service.OrderMessagingService;
@@ -18,7 +19,9 @@ public class JmsOrderMessagingServiceImpl implements OrderMessagingService {
 
     private Destination orderTopic;
 
-    public JmsOrderMessagingServiceImpl(JmsTemplate jmsTemplate, Destination orderQueue, Destination orderTopic) {
+    public JmsOrderMessagingServiceImpl(JmsTemplate jmsTemplate,
+                                        @Qualifier("orderQueue") Destination orderQueue,
+                                        @Qualifier("orderTopic") Destination orderTopic) {
         this.jmsTemplate = jmsTemplate;
         this.orderQueue = orderQueue;
         this.orderTopic = orderTopic;

@@ -11,6 +11,15 @@ spring:
     password: password
     embedded:
       enabled: false
+  rabbitmq:
+    host: localhost
+    port: 5673
+    username: guest
+    password: guest
+    template:
+      receive-timeout: 30000
+      exchange: tacocloud.order
+      routing-key: kitchens.central
 logging:
   level:
     root: info

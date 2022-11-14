@@ -1,4 +1,4 @@
-package tacos.kitchen.messaging.listener;
+package tacos.kitchen.messaging.jms.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

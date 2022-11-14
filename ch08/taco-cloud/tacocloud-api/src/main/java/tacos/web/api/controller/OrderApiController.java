@@ -1,5 +1,7 @@
 package tacos.web.api.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,8 @@ public class OrderApiController {
 
     private OrderMessagingService orderMessagingService;
 
-    public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties,OrderMessagingService orderMessagingService) {
+    public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties,
+                              @Qualifier("rabbitOrderMessagingService") OrderMessagingService orderMessagingService) {
         this.orderRepository = orderRepository;
         this.orderProperties = orderProperties;
         this.orderMessagingService = orderMessagingService;
