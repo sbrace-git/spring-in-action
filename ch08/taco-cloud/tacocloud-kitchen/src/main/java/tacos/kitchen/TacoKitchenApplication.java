@@ -16,12 +16,12 @@ public class TacoKitchenApplication {
         SpringApplication.run(TacoKitchenApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner receive(@Qualifier("rabbitOrderReceiver") OrderReceiver orderReceiver) {
-        return args -> {
-            log.info("receive order start");
-            Order order = orderReceiver.receiveOrder();
-            log.info("receive order = {}", order);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner receive(@Qualifier("rabbitOrderReceiver") OrderReceiver orderReceiver) {
+//        return args -> {
+//            log.info("receive order start");
+//            Order order = orderReceiver.receiveOrder();
+//            log.info("receive order = {}", order);
+//        };
+//    }
 }
