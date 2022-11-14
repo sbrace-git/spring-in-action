@@ -39,7 +39,7 @@ server:
 
 logging:
   level:
-    root: debug
+    root: info
     #    org.springframework.security: debug
     tacos.messaging: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
