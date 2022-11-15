@@ -22,7 +22,9 @@ public class OrderApiController {
     private OrderMessagingService orderMessagingService;
 
     public OrderApiController(OrderRepository orderRepository, OrderProperties orderProperties,
-                              @Qualifier("rabbitOrderMessagingService") OrderMessagingService orderMessagingService) {
+//                              @Qualifier("rabbitOrderMessagingService") OrderMessagingService orderMessagingService
+                              @Qualifier("kafkaOrderMessagingService") OrderMessagingService orderMessagingService
+    ) {
         this.orderRepository = orderRepository;
         this.orderProperties = orderProperties;
         this.orderMessagingService = orderMessagingService;

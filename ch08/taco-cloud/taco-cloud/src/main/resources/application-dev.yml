@@ -34,6 +34,14 @@ spring:
       receive-timeout: 30000
       exchange: tacocloud.order
       routing-key: kitchens.central
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: order:tacos.model.Order
 server:
   port: 8080
 
