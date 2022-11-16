@@ -24,7 +24,7 @@ public class FileWriterIntegrationConfig {
 
     @Profile("javaConfig")
     @Bean
-    @Transformer(inputChannel = "textInchannel", outputChannel = "fileWriterChannel")
+    @Transformer(inputChannel = "textInChannel", outputChannel = "fileWriterChannel")
     public GenericTransformer<String, String> upperCaseTransformer() {
         return String::toUpperCase;
     }
