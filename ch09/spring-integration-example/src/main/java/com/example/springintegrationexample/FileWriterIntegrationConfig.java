@@ -50,6 +50,7 @@ public class FileWriterIntegrationConfig {
         return IntegrationFlows
                 .from(MessageChannels.direct("textInChannel"))
                 .<String, String>transform(String::toUpperCase)
+                .channel("fileWriterChannel")
                 .handle(Files.outboundAdapter(new File("D:\\common\\temp\\files"))
                         .fileExistsMode(FileExistsMode.APPEND)
                         .appendNewLine(true))
