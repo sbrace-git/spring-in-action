@@ -37,7 +37,7 @@ public class FileWriterIntegrationConfig {
     @Bean
     @ServiceActivator(inputChannel = "fileWriterChannel")
     public FileWritingMessageHandler fileWriter() {
-        FileWritingMessageHandler fileWritingMessageHandler = new FileWritingMessageHandler(new File("D:\\common\\temp\\files"));
+        FileWritingMessageHandler fileWritingMessageHandler = new FileWritingMessageHandler(new File("F:\\common\\temp\\files"));
         fileWritingMessageHandler.setExpectReply(false);
         fileWritingMessageHandler.setFileExistsMode(FileExistsMode.APPEND);
         fileWritingMessageHandler.setAppendNewLine(true);
@@ -51,7 +51,7 @@ public class FileWriterIntegrationConfig {
                 .from(MessageChannels.direct("textInChannel"))
                 .<String, String>transform(String::toUpperCase)
                 .channel("fileWriterChannel")
-                .handle(Files.outboundAdapter(new File("D:\\common\\temp\\files"))
+                .handle(Files.outboundAdapter(new File("F:\\common\\temp\\files"))
                         .fileExistsMode(FileExistsMode.APPEND)
                         .appendNewLine(true))
                 .get();

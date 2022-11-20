@@ -21,7 +21,7 @@
 
     <int-file:outbound-channel-adapter id="writer"
                                        channel="fileWriterChannel"
-                                       directory="D:\common\temp\files"
+                                       directory="F:\common\temp\files"
                                        mode="APPEND"
                                        append-new-line="true" />
 
