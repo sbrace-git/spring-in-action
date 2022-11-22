@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import tacos.kitchen.messaging.domain.Order;
 
 @Slf4j
-@Component
+//@Component
 public class RabbitOrderListener {
 
     @RabbitListener(queues = "tacocloud.order")

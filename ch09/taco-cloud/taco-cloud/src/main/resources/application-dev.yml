@@ -3,7 +3,7 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:mysql://localhost:3307/tacocloud
+    url: jdbc:mysql://localhost:3306/tacocloud
     username: root
     password: 1111
   jpa:
@@ -25,23 +25,23 @@ spring:
     password: password
     embedded:
       enabled: false
-  rabbitmq:
-    host: localhost
-    port: 5673
-    username: guest
-    password: guest
-    template:
-      receive-timeout: 30000
-      exchange: tacocloud.order
-      routing-key: kitchens.central
-  kafka:
-    bootstrap-servers:
-      - localhost:9092
-    producer:
-      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
-      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring.json.type.mapping: order:tacos.model.Order
+#  rabbitmq:
+#    host: localhost
+#    port: 5673
+#    username: guest
+#    password: guest
+#    template:
+#      receive-timeout: 30000
+#      exchange: tacocloud.order
+#      routing-key: kitchens.central
+#  kafka:
+#    bootstrap-servers:
+#      - localhost:9092
+#    producer:
+#      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      properties:
+#        spring.json.type.mapping: order:tacos.model.Order
 server:
   port: 8080
 

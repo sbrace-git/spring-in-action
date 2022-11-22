@@ -35,7 +35,7 @@ create table if not exists Taco_Order
     ccExpiration   varchar(5)  not null,
     ccCVV          varchar(3)  not null,
     placedAt       timestamp   not null,
-    user_id        bigint      not null
+    user_id        bigint
 );
 
 create table if not exists Taco_Order_Tacos

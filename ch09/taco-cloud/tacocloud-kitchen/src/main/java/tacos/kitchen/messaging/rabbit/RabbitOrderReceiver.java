@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import tacos.kitchen.messaging.domain.Order;
 import tacos.kitchen.messaging.receiver.OrderReceiver;
 
-@Component("rabbitOrderReceiver")
+//@Component("rabbitOrderReceiver")
 public class RabbitOrderReceiver implements OrderReceiver {
 
     private final RabbitTemplate rabbitTemplate;
