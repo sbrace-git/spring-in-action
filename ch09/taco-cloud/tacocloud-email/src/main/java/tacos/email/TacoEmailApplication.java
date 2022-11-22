@@ -23,7 +23,7 @@ public class TacoEmailApplication {
         return new RestTemplate();
     }
 
-    @Bean
+//    @Bean
     public CommandLineRunner post(RestTemplate restTemplate, ApiProperties apiProperties) {
         return args -> {
             log.info("post");
