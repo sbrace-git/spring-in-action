@@ -16,6 +16,7 @@
         <module>tacocloud-kitchen</module>
         <module>tacocloud-messaging-rabbit</module>
         <module>tacocloud-messaging-kafka</module>
+        <module>tacocloud-email</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
