@@ -8,3 +8,4 @@ ISBN: 978-7-115-52792-9
 - Postman 10.1.2 [workspace](https://www.postman.com/sbrace-postman/workspace/spring-in-action)
 - Node.js v14.21.1
 - ActiveMQ Artemis 2.19.1
+- MySQL 8.0.31
