@@ -26,7 +26,7 @@
     </parent>
     <groupId>sia</groupId>
     <artifactId>taco-cloud-parent</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <name>tacos-cloud-parent</name>
     <description>tacos-cloud</description>
     <properties>
