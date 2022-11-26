@@ -1,11 +1,11 @@
 package tacos.web.api.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import tacos.model.Taco;
 import tacos.repository.TacoRepository;
 
@@ -27,6 +27,11 @@ public class DesignTacoAipController {
         PageRequest page = PageRequest.of(
                 0, 12, Sort.by("createdAt").descending());
         return tacoRepository.findAll(page).getContent();
+    }
+
+    @GetMapping("/recentFlux")
+    public Flux<Taco> recentFlux() {
+        return Flux.fromIterable(tacoRepository.findAll()).take(12);
     }
 
     @GetMapping("/{id}")
