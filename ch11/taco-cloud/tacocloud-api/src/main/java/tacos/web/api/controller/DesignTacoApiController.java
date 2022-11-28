@@ -15,10 +15,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/design", produces = "application/json")
 @CrossOrigin(origins = "*")
-public class DesignTacoAipController {
+public class DesignTacoApiController {
     private TacoRepository tacoRepository;
 
-    public DesignTacoAipController(TacoRepository tacoRepo) {
+    public DesignTacoApiController(TacoRepository tacoRepo) {
         this.tacoRepository = tacoRepo;
     }
 

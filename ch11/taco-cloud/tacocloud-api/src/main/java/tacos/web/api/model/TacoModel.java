@@ -8,7 +8,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.RepresentationModel;
 import tacos.model.Taco;
 import tacos.web.api.assembler.IngredientModelAssembler;
-import tacos.web.api.controller.DesignTacoAipController;
+import tacos.web.api.controller.DesignTacoApiController;
 
 import java.util.Date;
 
@@ -31,6 +31,6 @@ public class TacoModel extends RepresentationModel<TacoModel> {
         this.createdAt = taco.getCreatedAt();
         this.name = taco.getName();
         this.ingredients = ingredientModelAssembler.toCollectionModel(taco.getIngredients());
-        add(linkTo(methodOn(DesignTacoAipController.class).tacoById(taco.getId())).withRel("self"));
+        add(linkTo(methodOn(DesignTacoApiController.class).tacoById(taco.getId())).withRel("self"));
     }
 }
