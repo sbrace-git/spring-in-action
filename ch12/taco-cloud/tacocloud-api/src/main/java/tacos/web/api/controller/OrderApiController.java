@@ -42,8 +42,8 @@ public class OrderApiController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Order> postOrder(@RequestBody Order order) {
+        orderMessagingService.sendOrder(order);
         Mono<Order> save = orderRepository.save(order);
-//        orderMessagingService.sendOrder(save.block());
         return save;
     }
 

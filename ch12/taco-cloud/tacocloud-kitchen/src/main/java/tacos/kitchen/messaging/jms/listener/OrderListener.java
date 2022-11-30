@@ -10,7 +10,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 
 @Slf4j
-//@Component
+@Component
 public class OrderListener {
 
     private final MessageConverter messageConverter;
