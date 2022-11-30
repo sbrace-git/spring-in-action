@@ -1,0 +1,61 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/tacocloud
+    username: root
+    password: 1111
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      # set always at first time
+      mode: never
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+  artemis:
+    broker-url: tcp://localhost:61616
+    user: username
+    password: password
+    embedded:
+      enabled: false
+#  rabbitmq:
+#    host: localhost
+#    port: 5673
+#    username: guest
+#    password: guest
+#    template:
+#      receive-timeout: 30000
+#      exchange: tacocloud.order
+#      routing-key: kitchens.central
+#  kafka:
+#    bootstrap-servers:
+#      - localhost:9092
+#    producer:
+#      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      properties:
+#        spring.json.type.mapping: order:tacos.model.Order
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    #    org.springframework.security: debug
+    tacos.messaging: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+#    todo : config logging.file.path
+#  file:
+#    path: D:\common\temp
+#    name: taco-cloud.log
+
+taco:
+  orders:
+    pageSize: 21
