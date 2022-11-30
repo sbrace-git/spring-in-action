@@ -48,15 +48,16 @@
             <artifactId>tacocloud-messaging-kafka</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.mysql</groupId>-->
+        <!--            <artifactId>mysql-connector-j</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

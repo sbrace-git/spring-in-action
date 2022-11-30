@@ -6,6 +6,7 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import reactor.core.publisher.Mono;
 import tacos.model.Taco;
 import tacos.repository.TacoRepository;
 import tacos.web.api.assembler.TacoModelAssembler;
@@ -29,7 +30,7 @@ public class RecentTacosController {
     public CollectionModel<TacoModel> recentTacos() {
         PageRequest page = PageRequest.of(
                 0, 12, Sort.by("createdAt").descending());
-        List<Taco> tacos = tacoRepository.findAll(page).getContent();
+        List<Taco> tacos = tacoRepository.findAll().collectList().block();
         CollectionModel<TacoModel> tacoModels = new TacoModelAssembler().toCollectionModel(tacos);
         tacoModels.add(linkTo(methodOn(RecentTacosController.class).recentTacos()).withRel("recents"));
         return tacoModels;

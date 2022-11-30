@@ -2,10 +2,15 @@ spring:
   config:
     activate:
       on-profile: dev
-  datasource:
-    url: jdbc:mysql://localhost:3306/tacocloud
-    username: root
-    password: 1111
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/tacocloud
+#    username: root
+#    password: 1111
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: tacocloud
   jpa:
     show-sql: true
     hibernate:
@@ -47,10 +52,11 @@ server:
 
 logging:
   level:
-    root: info
+    root: debug
     #    org.springframework.security: debug
     tacos.messaging: debug
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
 #    todo : config logging.file.path
 #  file:
 #    path: D:\common\temp

@@ -1,28 +1,53 @@
-delete from Taco_Order_Tacos;
-delete from Taco_Ingredients;
-delete from Taco;
-delete from Taco_Order;
 
-delete from Ingredient;
-insert into Ingredient (id, name, type) 
-                values ('FLTO', 'Flour Tortilla', 'WRAP');
-insert into Ingredient (id, name, type) 
-                values ('COTO', 'Corn Tortilla', 'WRAP');
-insert into Ingredient (id, name, type) 
-                values ('GRBF', 'Ground Beef', 'PROTEIN');
-insert into Ingredient (id, name, type) 
-                values ('CARN', 'Carnitas', 'PROTEIN');
-insert into Ingredient (id, name, type) 
-                values ('TMTO', 'Diced Tomatoes', 'VEGGIES');
-insert into Ingredient (id, name, type) 
-                values ('LETC', 'Lettuce', 'VEGGIES');
-insert into Ingredient (id, name, type) 
-                values ('CHED', 'Cheddar', 'CHEESE');
-insert into Ingredient (id, name, type) 
-                values ('JACK', 'Monterrey Jack', 'CHEESE');
-insert into Ingredient (id, name, type) 
-                values ('SLSA', 'Salsa', 'SAUCE');
-insert into Ingredient (id, name, type) 
-                values ('SRCR', 'Sour Cream', 'SAUCE');
-
-insert into hibernate_sequence values ( 1 );
+db.ingredient.insertMany([
+  {
+    "id": "CARN",
+    "name": "Carnitas",
+    "type": "PROTEIN"
+  },
+  {
+    "id": "CHED",
+    "name": "Cheddar",
+    "type": "CHEESE"
+  },
+  {
+    "id": "COTO",
+    "name": "Corn Tortilla",
+    "type": "WRAP"
+  },
+  {
+    "id": "FLTO",
+    "name": "Flour Tortilla",
+    "type": "WRAP"
+  },
+  {
+    "id": "GRBF",
+    "name": "Ground Beef",
+    "type": "PROTEIN"
+  },
+  {
+    "id": "JACK",
+    "name": "Monterrey Jack",
+    "type": "CHEESE"
+  },
+  {
+    "id": "LETC",
+    "name": "Lettuce",
+    "type": "VEGGIES"
+  },
+  {
+    "id": "SLSA",
+    "name": "Salsa",
+    "type": "SAUCE"
+  },
+  {
+    "id": "SRCR",
+    "name": "Sour Cream",
+    "type": "SAUCE"
+  },
+  {
+    "id": "TMTO",
+    "name": "Diced Tomatoes",
+    "type": "VEGGIES"
+  }
+]);
