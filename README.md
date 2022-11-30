@@ -9,3 +9,4 @@ ISBN: 978-7-115-52792-9
 - Node.js v14.21.1
 - ActiveMQ Artemis 2.19.1
 - MySQL 8.0.31
+- MongoDB 6.0.3
