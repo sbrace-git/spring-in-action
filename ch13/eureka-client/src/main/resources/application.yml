@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ingredient-service
+    name: eureka-client
 
 server:
   port: 0
