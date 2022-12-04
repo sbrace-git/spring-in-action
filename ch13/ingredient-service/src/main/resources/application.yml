@@ -8,4 +8,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-host-1:8761/eureka,http://eureka-host-2:8762/eureka,http://eureka-host-3:8763/eureka
+      defaultZone:
+        http://eureka-host-1:8761/eureka,
+        http://eureka-host-2:8762/eureka,
+        http://eureka-host-3:8763/eureka
