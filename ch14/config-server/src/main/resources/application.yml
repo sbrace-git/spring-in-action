@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/sbrace/config-repository
+      label: main
+server:
+  port: 8888
