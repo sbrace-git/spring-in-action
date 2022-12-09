@@ -4,7 +4,7 @@ spring:
       server:
         git:
           uri: https://gitee.com/sbrace/config-repository
-          search-paths: config,more*
+          search-paths: greetings
           default-label: main
 server:
   port: 8888
