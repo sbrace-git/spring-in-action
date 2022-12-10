@@ -14,6 +14,6 @@ public class HelloController {
 
     @RequestMapping("/hello")
     public String hello() {
-        return greetingsProperties.getMessage();
+        return greetingsProperties.getMessage() + ", " + greetingsProperties.getName();
     }
 }
