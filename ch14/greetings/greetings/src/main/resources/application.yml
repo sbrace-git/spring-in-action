@@ -5,8 +5,8 @@ spring:
     config:
       uri: http://localhost:8888
       profile: prod
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: '*'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
