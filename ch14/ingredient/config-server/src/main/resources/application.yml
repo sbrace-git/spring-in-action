@@ -12,5 +12,5 @@ spring:
       server:
         git:
           uri: https://gitee.com/sbrace/config-repository
-          search-paths: config,more*
+          search-paths: ingredient
           default-label: main
