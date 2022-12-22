@@ -35,7 +35,9 @@ public class IngredientServiceClient {
         return Arrays.asList(ingredients);
     }
 
+    @HystrixCommand(fallbackMethod = "getDefaultIngredients2")
     private Iterable<Ingredient> getDefaultIngredients() {
+        int i = 1 / 0;
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(
                 "FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
@@ -43,6 +45,13 @@ public class IngredientServiceClient {
                 "GRBF", "Ground Beef", Ingredient.Type.PROTEIN));
         ingredients.add(new Ingredient(
                 "CHED", "Shredded Cheddar", Ingredient.Type.CHEESE));
+        return ingredients;
+    }
+
+    private Iterable<Ingredient> getDefaultIngredients2() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient(
+                "FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
         return ingredients;
     }
 }
