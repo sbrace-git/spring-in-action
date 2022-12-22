@@ -37,8 +37,12 @@ public class IngredientServiceClient {
     }
 
     @HystrixCommand(fallbackMethod = "getDefaultIngredients2",
-            commandProperties =
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"))
+            commandProperties = {
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")
+                    @HystrixProperty(name = "execution.timeout.enabled", value = "false")
+            }
+
+    )
     private Iterable<Ingredient> getDefaultIngredients() throws InterruptedException {
         Thread.sleep(1000);
         List<Ingredient> ingredients = new ArrayList<>();
