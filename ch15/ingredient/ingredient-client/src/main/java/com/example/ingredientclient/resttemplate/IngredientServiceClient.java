@@ -2,6 +2,7 @@ package com.example.ingredientclient.resttemplate;
 
 import com.example.ingredientclient.Ingredient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,11 @@ public class IngredientServiceClient {
         return Arrays.asList(ingredients);
     }
 
-    @HystrixCommand(fallbackMethod = "getDefaultIngredients2")
-    private Iterable<Ingredient> getDefaultIngredients() {
-        int i = 1 / 0;
+    @HystrixCommand(fallbackMethod = "getDefaultIngredients2",
+            commandProperties =
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"))
+    private Iterable<Ingredient> getDefaultIngredients() throws InterruptedException {
+        Thread.sleep(1000);
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(
                 "FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
