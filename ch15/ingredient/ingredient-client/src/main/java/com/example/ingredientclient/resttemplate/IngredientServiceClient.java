@@ -22,10 +22,39 @@ public class IngredientServiceClient {
         this.rest = rest;
     }
 
+    private static int count = 0;
+
+    @HystrixCommand(fallbackMethod = "getDefaultIngredientById",
+            commandProperties = {
+                    @HystrixProperty(
+                            name = "circuitBreaker.requestVolumeThreshold",
+                            value = "30"),
+                    @HystrixProperty(
+                            name = "circuitBreaker.errorThresholdPercentage",
+                            value = "25"),
+                    @HystrixProperty(
+                            name = "metrics.rollingStats.timeInMilliseconds",
+                            value = "30000"),
+                    @HystrixProperty(
+                            name = "circuitBreaker.sleepWindowInMilliseconds",
+                            value = "60000")
+            })
     public Ingredient getIngredientById(String ingredientId) {
+        count++;
+        System.out.println("getIngredientById count = " + count);
+        if (count > 10 && count < 60) {
+            throw new RuntimeException("error");
+        }
         return rest.getForObject(
                 "http://ingredient-service/ingredients/{id}",
                 Ingredient.class, ingredientId);
+    }
+
+    public Ingredient getDefaultIngredientById(String ingredientId) {
+        count++;
+        System.out.println("getDefaultIngredientById count = " + count);
+        return new Ingredient(
+                "FLTO", "Flour Tortilla", Ingredient.Type.WRAP);
     }
 
     @HystrixCommand(fallbackMethod = "getDefaultIngredients")
