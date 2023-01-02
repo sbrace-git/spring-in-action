@@ -1,6 +1,11 @@
 spring:
   application:
     name: ingredient-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
 
 server:
   port: 0

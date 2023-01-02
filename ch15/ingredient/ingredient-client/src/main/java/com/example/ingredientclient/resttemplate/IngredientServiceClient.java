@@ -59,7 +59,7 @@ public class IngredientServiceClient {
 
     @HystrixCommand(fallbackMethod = "getDefaultIngredients")
     public Iterable<Ingredient> getAllIngredients() {
-        int i = 1 / 0;
+//        int i = 1 / 0;
         Ingredient[] ingredients = rest.getForObject(
                 "http://ingredient-service/ingredients", Ingredient[].class);
         return Arrays.asList(ingredients);
@@ -73,7 +73,7 @@ public class IngredientServiceClient {
 
     )
     private Iterable<Ingredient> getDefaultIngredients() throws InterruptedException {
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(
                 "FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
