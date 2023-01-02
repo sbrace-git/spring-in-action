@@ -1,0 +1,5 @@
+server:
+  port: 8989
+turbine:
+  app-config: ingredient-client,ingredient-service
+  cluster-name-expression: "'default'"
