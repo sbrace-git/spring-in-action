@@ -23,3 +23,12 @@ info:
   contact:
     email: support@tacocloud.com
     phone: 822-625-6831
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    env:
+      post:
+        enabled: true
+      keys-to-sanitize: "port"
