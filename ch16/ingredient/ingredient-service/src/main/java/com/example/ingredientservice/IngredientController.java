@@ -47,6 +47,11 @@ public class IngredientController {
         return repo.findById(id);
     }
 
+    @GetMapping("/count")
+    public Long count() {
+        return repo.count();
+    }
+
     @PutMapping("/{id}")
     public void updateIngredient(@PathVariable String id, @RequestBody Ingredient ingredient) {
         if (!ingredient.getId().equals(id)) {

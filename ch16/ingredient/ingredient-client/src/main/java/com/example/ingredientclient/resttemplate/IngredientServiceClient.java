@@ -50,6 +50,12 @@ public class IngredientServiceClient {
                 Ingredient.class, ingredientId);
     }
 
+    public Long count() {
+        return rest.getForObject(
+                "http://ingredient-service/ingredients/count",
+                Long.class);
+    }
+
     public Ingredient getDefaultIngredientById(String ingredientId) {
         count++;
         System.out.println("getDefaultIngredientById count = " + count);
