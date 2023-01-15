@@ -1,6 +1,7 @@
 package com.example.ingredientservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,12 @@ import java.util.Optional;
 public class IngredientController {
 
     private IngredientRepository repo;
+    private final MeterRegistry meterRegistry;
 
     @Autowired
-    public IngredientController(IngredientRepository repo) {
+    public IngredientController(IngredientRepository repo, MeterRegistry meterRegistry) {
         this.repo = repo;
+        this.meterRegistry = meterRegistry;
     }
 
     @GetMapping
@@ -44,6 +47,7 @@ public class IngredientController {
 
     @GetMapping("/{id}")
     public Optional<Ingredient> byId(@PathVariable String id) {
+        meterRegistry.counter("tacocloud", "ingredient", id).increment();
         return repo.findById(id);
     }
 
