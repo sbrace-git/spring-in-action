@@ -8,7 +8,7 @@ spring:
         service-id: config-server
 
 server:
-  port: 0
+  port: 8081
 
 eureka:
   client:

@@ -47,7 +47,7 @@ public class IngredientController {
 
     @GetMapping("/{id}")
     public Optional<Ingredient> byId(@PathVariable String id) {
-        meterRegistry.counter("tacocloud", "ingredient", id).increment();
+        meterRegistry.counter("tacocloud", "ingredient", id, "test", "test id : " + id).increment();
         return repo.findById(id);
     }
 
