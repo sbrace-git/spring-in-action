@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: ingredient-client
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      label: main
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://eureka-host-1:8761/eureka,
+        http://eureka-host-2:8762/eureka,
+        http://eureka-host-3:8763/eureka
+
+info:
+  contact:
+    email: support@tacocloud.com
+    phone: 822-625-6831
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    env:
+      post:
+        enabled: true
+      keys-to-sanitize: "port"
+  info:
+    git:
+      mode: full
