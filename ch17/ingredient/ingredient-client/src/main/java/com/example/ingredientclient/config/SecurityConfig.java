@@ -20,7 +20,13 @@ public class SecurityConfig {
 //                .httpBasic();
 
         http.requestMatcher(EndpointRequest.toAnyEndpoint())
-                .authorizeRequests(registry -> registry.anyRequest().permitAll());
+                .authorizeRequests(registry -> {
+                    try {
+                        registry.anyRequest().permitAll().and().csrf().disable();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         return http.build();
     }
 }
