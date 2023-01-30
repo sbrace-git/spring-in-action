@@ -7,19 +7,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.requestMatcher(EndpointRequest.toAnyEndpoint().excluding("beans"))
-                .authorizeRequests()
-                .anyRequest().hasRole("ADMIN")
-                .and()
-                .httpBasic();
+//        http.requestMatcher(EndpointRequest.toAnyEndpoint().excluding("beans"))
+//                .authorizeRequests()
+//                .anyRequest().hasRole("ADMIN")
+//                .and()
+//                .httpBasic();
 
-
+        http.requestMatcher(EndpointRequest.toAnyEndpoint())
+                .authorizeRequests(registry -> registry.anyRequest().permitAll());
         return http.build();
     }
 }
