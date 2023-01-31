@@ -35,3 +35,7 @@ management:
   info:
     git:
       mode: full
+  endpoints:
+    jmx:
+      exposure:
+        exclude: info
