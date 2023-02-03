@@ -12,3 +12,4 @@ ISBN: 978-7-115-52792-9
 - RabbitMQ 3.11.3
 - MySQL 8.0.31
 - MongoDB 6.0.3
+- Tomcat 9.0.71
