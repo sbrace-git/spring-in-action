@@ -8,10 +8,12 @@ spring:
       name: user
       password: 53cr3t
 eureka:
+  instance:
+    hostname: localhost
   client:
     service-url:
       defaultZone:
         http://eureka-host-1:8761/eureka,
         http://eureka-host-2:8762/eureka,
         http://eureka-host-3:8763/eureka
-    register-with-eureka: false
+#    register-with-eureka: false
