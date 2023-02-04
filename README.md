@@ -13,3 +13,4 @@ ISBN: 978-7-115-52792-9
 - MySQL 8.0.31
 - MongoDB 6.0.3
 - Tomcat 9.0.71
+- CentOS 7.9.2009
